@@ -24,7 +24,7 @@ OBJS=$(CFILES : .c=.o)
 all: $(EXE)
 # Cette règle permet de construire l’exécutable. Elle dépend des fichiers
 # .o et effectue l’édition de lien. Rien de nouveau ici
-$(EXE): $(OBJS) Main.c
+$(EXE): $(OBJS) Main.c socket.c
 	$(LD) $^ $(LDFLAGS) -o $@
 # Cette règle permet de construire automatiquement les règles
 # de compilation pour chacun des fichiers .c
