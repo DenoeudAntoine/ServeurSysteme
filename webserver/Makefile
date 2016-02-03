@@ -20,7 +20,7 @@ OBJS=$(CFILES : .c=.o)
 # ne fabrique pas de fichier du nom de leur cible
 .PHONY: all clean mrproper
 # La règle par défaut déclenche la fabrication de l’exécutable
-# par dépendance
+# par dépendance 
 all: $(EXE)
 # Cette règle permet de construire l’exécutable. Elle dépend des fichiers
 # .o et effectue l’édition de lien. Rien de nouveau ici
