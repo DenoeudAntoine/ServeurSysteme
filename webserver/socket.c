@@ -12,3 +12,21 @@ int socket(int domain, int type, int protocol){
     }
   /* Utilisation de la socket serveur */
 }
+
+
+int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
+  struct sockaddr_in {
+    sa_family_t
+    sin_family ; /* address family : AF_INET */
+    in_port_t sin_port ; /* port in network byte order */
+    struct in_addr sin_addr ;
+    /* internet address */
+  };
+  /* Internet address . */
+  struct in_addr {
+    uint32_t
+    s_addr ;
+  };
+
+  
+}
