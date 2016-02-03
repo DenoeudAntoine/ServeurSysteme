@@ -1,0 +1,9 @@
+3.2.1 Test de votre programme	
+
+Réponses:
+
+1. Les clients ont été déconnectés et sur le terminal serveur affiche ce message d'erreur "bind socker_serveur : Address already in use".
+2. Il ne se passe rien.
+3. Message d'erreur : "Trying ::1...
+telnet: Unable to connect to remote host: Connection refused"
+4. Les deux clients semblent connectés.Un client reçoit le message de bienvenue et peut faire le "echo" alors que l'autre non.
