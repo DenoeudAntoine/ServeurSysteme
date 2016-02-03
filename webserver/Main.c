@@ -13,23 +13,31 @@ int main(void)
       exit(1);
     }
 
-       while(1) {
-	 int socket_client ;
+    while(1) {
+      int socket_client ;
+      
+      socket_client = accept(socket_serveur,NULL,NULL);
+      if(socket_client == -1)
+	{
+	  perror ("accept");
+	  /* traitement d ’ erreur */
+	}
+      /* On peut maintenant dialoguer avec le client */
+      const char * message_bienvenue = "Bonjour,bienvenue sur mon serveur\n c'est cool \n toto \n plus d'idées \n bon \n c'est \n bientot \n fini \n ! \n ou pas \n ah si.\n";
+      sleep(5);
+      write(socket_client,message_bienvenue,strlen(message_bienvenue));
+      char message_client[50];
+      while(read(socket_client,message_client,5)>0){
+	write(socket_client,message_client,6);
+	
+      }
 
-	 socket_client = accept(socket_serveur,NULL,NULL);
-	 if(socket_client == -1)
-	   {
-	     perror ("accept");
-       /* traitement d ’ erreur */
-	   }
-	 /* On peut maintenant dialoguer avec le client */
-	 const char * message_bienvenue = "Bonjour,bienvenue sur mon serveur\n c'est cool \n toto \n plus d'idées \n bon \n c'est \n bientot \n fini \n ! \n ou pas \n ah si.\n";
-	 sleep(1);
-	 write(socket_client,message_bienvenue,strlen(message_bienvenue));
-	 
-   }
-       
-       
-       
-       return 0;
+     
+      //wwx
+      
+    }
+
+    close(socket_serveur);
+    
+    return 0;
 }
