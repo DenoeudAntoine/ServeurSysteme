@@ -9,7 +9,9 @@ int creer_serveur(int port) {
     {
       perror ("socket_serveur");
     }
-
+  int optval = 1;
+  if (setsockopt(socket_serveur, SOL_SOCKET, SO_REUSEADDR, &optval , sizeof(int)) == -1 )
+    perror("Can not set SO_REUSEADDR option");
   struct sockaddr_in saddr;
   saddr.sin_family = AF_INET ; /* Socket ipv4 */
   saddr.sin_port = htons (port); /* Port d ’ écoute */
