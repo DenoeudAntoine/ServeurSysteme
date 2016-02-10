@@ -22,14 +22,16 @@ int main(void)
 	  perror ("accept");
 	  /* traitement d ’ erreur */
 	}
+      initialiser_signaux();
       /* On peut maintenant dialoguer avec le client */
       const char * message_bienvenue = "Bonjour,bienvenue sur mon serveur\n c'est cool \n toto \n plus d'idées \n bon \n c'est \n bientot \n fini \n ! \n ou pas \n ah si.\n";
-      sleep(5);
-      write(socket_client,message_bienvenue,strlen(message_bienvenue));
+      sleep(1);
+      write(socket_client,message_bienvenue,strlen(message_bienvenue)+1);
       char message_client[50];
-      while(read(socket_client,message_client,5)>0){
-	write(socket_client,message_client,6);
-	
+      memset(message_client, 0, sizeof(message_client));
+      while(read(socket_client,&message_client,50)>0){
+	write(socket_client,&message_client,50);
+        memset(message_client, 0, sizeof(message_client));
       }
 
      
