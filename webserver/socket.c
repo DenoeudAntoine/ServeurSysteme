@@ -19,7 +19,7 @@ int creer_serveur(int port) {
   saddr.sin_port = htons (port); /* Port d ’ écoute */
   saddr.sin_addr.s_addr = htonl(INADDR_ANY); /* écoute sur toutes les interfaces */
   
-  if (bind (socket_serveur , (struct sockaddr *) &saddr ,sizeof ( saddr )) == -1)
+  if (bind (socket_serveur,(struct sockaddr *) &saddr,sizeof(saddr)) == -1)
     {
       perror (" bind socker_serveur ");
       /* traitement de l ’ erreur */
