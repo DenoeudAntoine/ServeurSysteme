@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <signal.h>
 #include "socket.h"
 
 int main(void)
@@ -14,9 +15,9 @@ int main(void)
       perror("créer_serveur");
       exit(1);
     }
-
+     int socket_client;
     while(1) {
-      int socket_client;
+     
       int pid;
       socket_client = accept(socket_serveur,NULL,NULL);
      
@@ -48,4 +49,27 @@ int main(void)
     close(socket_serveur);
     
     return 0;
+}
+
+void traitement_signal(int sig){
+  printf("Signal %d reçu\n", sig);
+  int status = 0;
+  while(waitpid(-1,&status,WNOHANG)!=-1){
+  }
+}
+
+void initialiser_signaux(void)
+{
+
+  if(signal(SIGPIPE,SIG_IGN) == SIG_ERR)
+    perror("initialiser signaux");
+
+  struct sigaction sa;
+
+  sa.sa_handler = traitement_signal;
+  sigemptyset(&sa.sa_mask);
+  sa.sa_flags = SA_RESTART;
+  if(sigaction(SIGCHLD, &sa, NULL) == -1) {
+    perror("sigaction(SIGCHLD)");
+  }
 }
