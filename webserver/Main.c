@@ -46,7 +46,7 @@ int main(void)
       
       while(1){
 	fgets(buff,1024,file);
-	fprintf(file,"<Pawnee> %s",buff);
+	printf("<Pawnee> %s",buff);
 	memset(buff,0,sizeof(buff));
       }
       
