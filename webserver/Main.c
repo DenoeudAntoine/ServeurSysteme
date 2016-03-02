@@ -9,7 +9,7 @@ int main(void)
 {
   int socket_serveur;
     initialiser_signaux();
-   socket_serveur = creer_serveur(8080);
+   socket_serveur = creer_serveur(9876);
   
     if(socket_serveur == -1) {
       perror("créer_serveur");
@@ -33,12 +33,23 @@ int main(void)
       const char * message_bienvenue = "Bonjour,bienvenue sur mon serveur Pawnee !\n";
       sleep(1);
       write(socket_client,message_bienvenue,strlen(message_bienvenue)+1);
-      char message_client[50];
+      /* char message_client[50];
       memset(message_client, 0, sizeof(message_client));
       while(read(socket_client,&message_client,50)>0){
 	write(socket_client,&message_client,50);
         memset(message_client, 0, sizeof(message_client));
+	}*/
+
+      FILE *file = fdopen(socket_client,"w+");
+      char buff[1024];
+      memset(buff,0,sizeof(buff));
+      
+      while(1){
+	fgets(buff,1024,file);
+	fprintf(file,"<Pawnee> %s",buff);
+	memset(buff,0,sizeof(buff));
       }
+      
       } else {
 	close(socket_client);
       }
