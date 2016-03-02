@@ -30,9 +30,7 @@ int main(void)
       pid = fork();
       if(pid == 0) {
       /* On peut maintenant dialoguer avec le client */
-      const char * message_bienvenue = "Bonjour,bienvenue sur mon serveur Pawnee !\n";
-      sleep(1);
-      write(socket_client,message_bienvenue,strlen(message_bienvenue)+1);
+     
       /* char message_client[50];
       memset(message_client, 0, sizeof(message_client));
       while(read(socket_client,&message_client,50)>0){
@@ -42,7 +40,29 @@ int main(void)
 
       FILE *file = fdopen(socket_client,"w+");
       char buff[1024];
+      fgets(buff,1024,file);
+       
+      char *mots;
+      char tmp[1024];
+      strcpy(tmp,buff);
+      mots = strtok(tmp," ");
+
+   
+      if(strcmp(mots,"GET") != 0)
+	return 0;
+
+      mots = strtok(NULL," ");
+      mots = strtok(NULL," ");
+      if(strcmp(mots,"HTTP/1.0") == 0 || strcmp(mots,"HTTP/1.1") == 0)
+	return 0;
+        printf("<Pawnee> %s",buff);
       memset(buff,0,sizeof(buff));
+     
+
+       const char * message_bienvenue = "Bonjour,bienvenue sur mon serveur Pawnee !\n";
+      sleep(1);
+      write(socket_client,message_bienvenue,strlen(message_bienvenue)+1);
+
       
       while(1){
 	fgets(buff,1024,file);
@@ -60,6 +80,10 @@ int main(void)
     close(socket_serveur);
     
     return 0;
+}
+
+void messageErreur(void){
+  
 }
 
 void traitement_signal(int sig){
