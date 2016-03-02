@@ -30,7 +30,7 @@ int main(void)
       pid = fork();
       if(pid == 0) {
       /* On peut maintenant dialoguer avec le client */
-      const char * message_bienvenue = "Bonjour,bienvenue sur mon serveur\n c'est cool \n toto \n plus d'idées \n bon \n c'est \n bientot \n fini \n ! \n ou pas \n ah si.\n";
+      const char * message_bienvenue = "Bonjour,bienvenue sur mon serveur Pawnee !\n";
       sleep(1);
       write(socket_client,message_bienvenue,strlen(message_bienvenue)+1);
       char message_client[50];
